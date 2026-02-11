@@ -1,4 +1,4 @@
-import { TimeInterval } from '../types';
+import { TimeInterval } from "../types";
 
 export const data: TimeInterval[] = [
     {
@@ -12,8 +12,8 @@ export const data: TimeInterval[] = [
             { year: 2017, description: "Компания SpaceX впервые в истории осуществила повторный запуск ракеты-носителя Falcon 9" },
             { year: 2018, description: "Марсоход Curiosity обнаружил органические молекулы в древних осадках на Марсе" },
             { year: 2020, description: "Запуск миссии Mars 2020 с марсоходом Perseverance" },
-            { year: 2022, description: "Первые научные снимки телескопа Джеймс Уэбб" }
-        ]
+            { year: 2022, description: "Первые научные снимки телескопа Джеймс Уэбб" },
+        ],
     },
     {
         id: 2,
@@ -26,8 +26,8 @@ export const data: TimeInterval[] = [
             { year: 1982, description: "Премьера фильма «Инопланетянин» Стивена Спилберга" },
             { year: 1984, description: "Выход первого «Терминатора»" },
             { year: 1985, description: "Премьера «Назад в будущее»" },
-            { year: 1986, description: "Выход фильма «Чужие»" }
-        ]
+            { year: 1986, description: "Выход фильма «Чужие»" },
+        ],
     },
     {
         id: 3,
@@ -40,8 +40,8 @@ export const data: TimeInterval[] = [
             { year: 1994, description: "Публикация «Бессонницы» Стивена Кинга" },
             { year: 1995, description: "Публикация романа «Слепота» Жозе Сарамаго" },
             { year: 1996, description: "Выход «Игры престолов» Джорджа Мартина" },
-            { year: 1997, description: "Выход первой книги о Гарри Поттере" }
-        ]
+            { year: 1997, description: "Выход первой книги о Гарри Поттере" },
+        ],
     },
     {
         id: 4,
@@ -54,8 +54,8 @@ export const data: TimeInterval[] = [
             { year: 2002, description: "Релиз альбома 'The Eminem Show'" },
             { year: 2003, description: "Выход альбома 'Elephant' группы The White Stripes" },
             { year: 2004, description: "Релиз 'American Idiot' группы Green Day" },
-            { year: 2005, description: "Выход 'Demon Days' группы Gorillaz" }
-        ]
+            { year: 2005, description: "Выход 'Demon Days' группы Gorillaz" },
+        ],
     },
     {
         id: 5,
@@ -67,8 +67,8 @@ export const data: TimeInterval[] = [
             { year: 2009, description: "Усейн Болт устанавливает мировые рекорды на 100 и 200 метров" },
             { year: 2010, description: "Чемпионат мира по футболу в ЮАР" },
             { year: 2011, description: "Новак Джокович впервые становится первой ракеткой мира" },
-            { year: 2012, description: "Летние Олимпийские игры в Лондоне" }
-        ]
+            { year: 2012, description: "Летние Олимпийские игры в Лондоне" },
+        ],
     },
     {
         id: 6,
@@ -80,7 +80,7 @@ export const data: TimeInterval[] = [
             { year: 1903, description: "Первый полет братьев Райт" },
             { year: 1905, description: "Альберт Эйнштейн публикует теорию относительности" },
             { year: 1909, description: "Роберт Пири достигает Северного полюса" },
-            { year: 1910, description: "Эрнест Резерфорд открывает атомное ядро" }
-        ]
-    }
+            { year: 1910, description: "Эрнест Резерфорд открывает атомное ядро" },
+        ],
+    },
 ];

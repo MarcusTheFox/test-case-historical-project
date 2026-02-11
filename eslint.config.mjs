@@ -2,7 +2,6 @@ import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import stylistic from '@stylistic/eslint-plugin';
-import react from 'eslint-plugin-react';
 
 export default tseslint.config(
     {
@@ -21,8 +20,7 @@ export default tseslint.config(
             },
         },
         plugins: {
-            '@stylistic': stylistic,
-            'react': react,
+            '@stylistic': stylistic
         },
         settings: {
             react: {
@@ -30,8 +28,6 @@ export default tseslint.config(
             },
         },
         rules: {
-            ...react.configs.recommended.rules,
-            ...react.configs['jsx-runtime'].rules,
             "@stylistic/array-bracket-newline": ["error", "consistent"],
             "@stylistic/array-bracket-spacing": ["error", "always"],
             "@stylistic/array-element-newline": ["error", { "consistent": true, "multiline": true }],
