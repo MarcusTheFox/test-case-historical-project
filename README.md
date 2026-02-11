@@ -2,6 +2,10 @@
 
 This project is a React-based interactive block with historical dates.
 
+You can view the live demo here: [https://marcusthefox.github.io/test-case-historical-project/](https://marcusthefox.github.io/test-case-historical-project/)
+
+Note: The demo page includes two separate instances of the component to demonstrate its complete independence and functional isolation from other elements on the page.
+
 ## Features
 - Interactive circular navigation for time intervals (2 to 6 intervals).
 - GSAP animations for the circle and year transitions.
