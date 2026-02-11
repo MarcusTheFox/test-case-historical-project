@@ -27,7 +27,7 @@ jobs:
 
     - name: Build
       run: |
-        npm install
+        npm ci --force
         npm run build
     - name: Setup Pages
       uses: actions/configure-pages@v5
