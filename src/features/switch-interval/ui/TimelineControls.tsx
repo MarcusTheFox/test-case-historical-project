@@ -47,7 +47,7 @@ interface Props {
     onNext: () => void;
 }
 
-export const TimelineControls: React.FC<Props> = ({ current, total, onPrev, onNext }) => {
+export const TimelineControls: React.FC<Props> = React.memo(({ current, total, onPrev, onNext }) => {
     return (
         <ControlsContainer>
             <Counter>
@@ -69,4 +69,4 @@ export const TimelineControls: React.FC<Props> = ({ current, total, onPrev, onNe
             </NavButtons>
         </ControlsContainer>
     );
-};
+});

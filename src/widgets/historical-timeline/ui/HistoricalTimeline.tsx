@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,6 +6,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import { TimeInterval } from "@/shared/types";
 import { TimelineControls } from "@/features/switch-interval/ui/TimelineControls";
 import { EventItem } from "@/entities/interval/ui/EventItem";
+import { YearDisplay } from "@/entities/interval/ui/YearDisplay";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -31,48 +32,6 @@ const AnimatedSection = styled.div`
             opacity: 1;
             transform: translateY(0);
         }
-    }
-`;
-
-const YearsContainer = styled.div`
-    position: absolute;
-    width: 973px;
-    height: 160px;
-    left: 50%;
-    top: 480px;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 0;
-    pointer-events: none;
-
-    @media (max-width: 768px) {
-        position: relative;
-        width: 100%;
-        height: auto;
-        left: 0;
-        top: 0;
-        transform: none;
-        padding: 20px 20px;
-        margin-top: 20px;
-    }
-`;
-
-const Year = styled.span<{ color: string }>`
-    font-family: 'PT Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 200px;
-    line-height: 160px;
-    text-align: center;
-    letter-spacing: -0.02em;
-    color: ${ ( props ) => props.color };
-
-    @media (max-width: 768px) {
-        font-size: 56px;
-        line-height: 1.2;
-        letter-spacing: -0.02em;
     }
 `;
 
@@ -231,7 +190,7 @@ const MobilePagination = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 10px; 
+        gap: 10px;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -285,23 +244,11 @@ interface Props {
 
 export const HistoricalTimeline: React.FC<Props> = ({ data }) => {
     const [ activeIndex, setActiveIndex ] = useState( 0 );
-    const activeInterval = data[activeIndex];
+    const activeInterval = useMemo(() => data[activeIndex], [ data, activeIndex ]);
     const circleRef = useRef<HTMLDivElement>( null );
-    const [ years, setYears ] = useState({ start: activeInterval.startYear, end: activeInterval.endYear });
     const id = React.useId().replace( /:/g, "" );
 
     useEffect(() => {
-        const obj = { start: years.start, end: years.end };
-        gsap.to( obj, {
-            start: activeInterval.startYear,
-            end: activeInterval.endYear,
-            duration: 1,
-            roundProps: "start,end",
-            onUpdate: () => {
-                setYears({ start: Math.round( obj.start ), end: Math.round( obj.end ) });
-            },
-        });
-
         if ( circleRef.current ) {
             const angleStep = 360 / data.length;
             const rotation = -activeIndex * angleStep;
@@ -320,24 +267,25 @@ export const HistoricalTimeline: React.FC<Props> = ({ data }) => {
                 });
             });
         }
-    }, [ activeIndex ]);
+    }, [ activeIndex, data.length ]);
 
-    const handleNext = () => {
-        if ( activeIndex < data.length - 1 ) setActiveIndex( activeIndex + 1 );
-    };
+    const handleNext = useCallback(() => {
+        setActiveIndex(( prev ) => ( prev < data.length - 1 ? prev + 1 : prev ));
+    }, [ data.length ]);
 
-    const handlePrev = () => {
-        if ( activeIndex > 0 ) setActiveIndex( activeIndex - 1 );
-    };
+    const handlePrev = useCallback(() => {
+        setActiveIndex(( prev ) => ( prev > 0 ? prev - 1 : prev ));
+    }, []);
+
+    const handlePointClick = useCallback(( index: number ) => {
+        setActiveIndex( index );
+    }, []);
 
     const angleStep = 360 / data.length;
 
     return (
         <>
-            <YearsContainer>
-                <Year color="#5D5FEF">{ years.start }</Year>
-                <Year color="#EF5DA8">{ years.end }</Year>
-            </YearsContainer>
+            <YearDisplay end={ activeInterval.endYear } start={ activeInterval.startYear } />
 
             <AnimatedSection key={ activeIndex }>
                 <CategoryLabel>{ activeInterval.label }</CategoryLabel>
@@ -387,7 +335,7 @@ export const HistoricalTimeline: React.FC<Props> = ({ data }) => {
                         <Point
                             active={ index === activeIndex }
                             data-index={ index + 1 }
-                            onClick={ () => setActiveIndex( index ) }
+                            onClick={ () => handlePointClick( index ) }
                         >
                             <PointLabel>{ interval.label }</PointLabel>
                         </Point>

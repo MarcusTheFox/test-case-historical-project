@@ -36,11 +36,11 @@ interface Props {
     event: TimelineEvent;
 }
 
-export const EventItem: React.FC<Props> = ({ event }) => {
+export const EventItem: React.FC<Props> = React.memo(({ event }) => {
     return (
         <EventItemContainer>
             <EventYear>{ event.year }</EventYear>
             <EventDescription>{ event.description }</EventDescription>
         </EventItemContainer>
     );
-};
+});
